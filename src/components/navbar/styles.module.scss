@@ -1,0 +1,59 @@
+.navbar {
+
+  width: 100%;
+  padding: 20px 50px;
+  text-align: center;
+  background: #fff;
+  color: #fff;
+  height: fit-content;
+  display: inline-flex;
+  
+  @media (min-width: 1000px) {
+    box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2),0 0px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .search {
+    display: inline-flex;
+    width: 20%;
+
+    input {
+      background: #F8F8F8;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 7px 0 0 7px;
+      font-size: 1em;
+      font-weight: 400;
+      width: 100%;
+    }
+
+    .button {
+      background: #3C62D2;
+      padding: 10px 15px;
+      border-radius: 0 7px 7px 0;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: #6987E2;
+      }
+    }
+  }
+
+  .connect {
+    margin-left: auto;
+    border-left: 1px solid #E9E9E9;
+    padding-left: 30px;
+    font-size: 1em;
+    font-weight: 400;
+
+    .button {
+      background: #3C62D2;
+      padding: 10px 30px;
+      border-radius: 7px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: #6987E2;
+      }
+    }
+  }
+}
