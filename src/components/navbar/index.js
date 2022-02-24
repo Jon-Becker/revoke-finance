@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { FaSearch } from "react-icons/fa";
 
-const Sidebar = ({ tabs }) => {
-
+const Sidebar = ({ active, account, connect }) => {
+  console.log(account)
   return (
     <div className={styles.navbar}>
       
@@ -13,7 +13,13 @@ const Sidebar = ({ tabs }) => {
       </div>
 
       <div className={styles.connect}>
-        <button className={styles.button}>Connect</button>
+        {
+          !active ? (
+            <button className={styles.button} onClick={() => connect()}>Connect</button>
+          ) : (
+            <p>{account}</p>
+          )
+        }
       </div>
     </div>
   );
