@@ -1,16 +1,18 @@
 .sidebar {
   height: 100%;
   background: #3C62D2;
-  display: inline-flex;
   flex-direction: column;
   padding: 30px;
   text-align: center;
   color: #ffffff;
+  display: none;
+
   
   @media (min-width: 1000px) {
     width: 10%;
     min-width: 250px;
     box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2),0 0px 20px 0 rgba(0,0,0,0.19);
+    display: inline-flex;
   }
 
   h1 {

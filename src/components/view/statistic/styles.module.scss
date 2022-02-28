@@ -1,0 +1,38 @@
+.statistic {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border-left: 4px solid transparent;
+  border-radius: 7px;
+  padding: 20px;
+  width: 100%;
+  margin: 0;
+
+  @media (min-width: 1000px) {
+    margin: 0 30px;
+    width: 25%;
+  }
+
+  .statWrapper {
+    min-width: 50%;
+
+    .title {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+  
+    .stat {
+      font-size: 2em;
+      font-weight: 400;
+      color: #515151;
+      margin: 0;
+    }
+  }
+
+  .icon {
+    display: flex;
+    margin-left: auto;
+    font-size: 3.5em;
+    color: #D9D9D9;
+  }
+}

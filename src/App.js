@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./components/wallet/injector";
 import {useEagerConnect, web3} from "web3";
+import View from './components/view';
 
 function App() {
 
@@ -29,10 +30,14 @@ function App() {
     
   }
 
+
   return (
     <section className={styles.main}>
       <Sidebar active={activeDashboardView} updateActive={setDashboardView} />
-      <Navbar active={active} account={account} connect={connect} />
+      <div className={styles.view}>
+        <Navbar active={active} account={account} connect={connect} />
+        <View active={activeDashboardView} account={account} library={library} />
+      </div>
     </section>
   );
 }

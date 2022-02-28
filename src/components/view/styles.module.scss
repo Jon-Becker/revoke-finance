@@ -1,0 +1,55 @@
+.view {
+  height: 100%;
+  width: 100%;
+  color: #000;
+  position: relative;
+
+  .headline {
+    width: 100%;
+    padding: 30px 30px 0 30px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h2 {
+      font-weight: 300;
+      font-size: 2em;
+      color: #515151;
+      margin: 0;
+    }
+
+    .button {
+      color: #fff;
+      margin-left: auto;
+      background: #3C62D2;
+      padding: 10px 30px;
+      border-radius: 7px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: #6987E2;
+      }
+    }
+  }
+
+  .dashboard {
+    display: flex;
+  }
+}
+
+.centered {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  h2 {
+    font-size: 4em;
+    color: #515151;
+  }
+  p {
+    font-size: 1.2em;
+    color: #717171;
+  }
+}

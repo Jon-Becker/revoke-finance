@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { FaEthereum, FaSearch } from "react-icons/fa";
-import Blockie from '../blockie';
+import Blockie from './blockie';
 
 const Sidebar = ({ active, account, connect }) => {
   console.log(account)
