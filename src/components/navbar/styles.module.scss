@@ -56,4 +56,15 @@
       }
     }
   }
+
+  .address {
+    color: #717171;
+    font-weight: 300;
+    display: inline-flex;
+    align-items: center;
+
+    a {
+      margin-right: 30px;
+    }
+  }
 }

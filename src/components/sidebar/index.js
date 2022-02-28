@@ -12,8 +12,10 @@ const Sidebar = ({ active, updateActive }) => {
       <h1>Fenris</h1>
       <hr />
 
-      <LinkWrap title="Dashboard" icon={<FaTachometerAlt />} active={active === "dashboard" ? true : false} update={updateActive} />
-      <LinkWrap title="Tokens" icon={<FaList />} active={active === "tokens" ? true : false} update={updateActive} />
+      <div className={styles.linkContainer}>
+        <LinkWrap title="Dashboard" icon={<FaTachometerAlt />} active={active === "dashboard" ? true : false} update={updateActive} />
+        <LinkWrap title="Tokens" icon={<FaList />} active={active === "tokens" ? true : false} update={updateActive} />
+      </div>
 
       <div className={styles.credits}>
         <hr />

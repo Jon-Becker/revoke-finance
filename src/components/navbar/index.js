@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { FaSearch } from "react-icons/fa";
+import { FaEthereum, FaSearch } from "react-icons/fa";
+import Blockie from '../blockie';
 
 const Sidebar = ({ active, account, connect }) => {
   console.log(account)
@@ -15,9 +16,12 @@ const Sidebar = ({ active, account, connect }) => {
       <div className={styles.connect}>
         {
           !active ? (
-            <button className={styles.button} onClick={() => connect()}>Connect</button>
+            <button className={styles.button} onClick={() => connect()}><FaEthereum /> Connect</button>
           ) : (
-            <p>{account}</p>
+            <div className={styles.address}>
+              <a href={`https://etherscan.io/address/${account}`}>{account.substring(0,6)}...{account.substring(36)}</a>
+              <Blockie address={account} />
+            </div>
           )
         }
       </div>
