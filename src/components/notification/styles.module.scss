@@ -1,0 +1,46 @@
+.notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  max-width: 20%;
+  background: #3C62D2;
+  padding: 10px 25px;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1),0 5px 10px 0 rgba(0,0,0,0.09);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 300;
+  font-size: 1em;
+
+  animation-duration: 5.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-name: flyin;
+  animation-timing-function: ease-in-out;
+
+  div:first-child {
+    margin-right: 20px;
+  }
+}
+
+@keyframes flyin {
+  0% {
+    transform: translateY(100px);
+  }
+  4% {
+    transform: translateY(-7px);
+  }
+  6% {
+    transform: translateY(0);
+  }
+  94% {
+    transform: translateY(0);
+  }
+  96% {
+    transform: translateY(-7px);
+  }
+  100% {
+    transform: translateY(100px);
+  }
+}

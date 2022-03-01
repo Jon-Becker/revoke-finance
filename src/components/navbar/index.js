@@ -4,7 +4,6 @@ import { FaEthereum, FaSearch } from "react-icons/fa";
 import Blockie from './blockie';
 
 const Sidebar = ({ active, account, connect }) => {
-  console.log(account)
   return (
     <div className={styles.navbar}>
       

@@ -16,19 +16,24 @@ function App() {
   async function connect() {
     try {
       await activate(injected)
+      localStorage.setItem("account", account)
     } catch (ex) {
-      console.log(ex)
     }
   }
 
   async function disconnect() {
     try {
       await deactivate()
+      localStorage.removeItem("account")
     } catch (ex) {
-      console.log(ex)
     }
-    
   }
+
+  useEffect(() => {
+    if(localStorage.getItem("account") != null){
+      connect();
+    }
+  }, [])
 
 
   return (

@@ -1,38 +1,45 @@
-.statistic {
-  display: inline-flex;
+.container {
   align-items: center;
-  background: #fff;
-  border-left: 4px solid transparent;
-  border-radius: 7px;
-  padding: 20px;
-  width: 100%;
-  margin: 0;
+  padding: 15px;
 
   @media (min-width: 1000px) {
-    margin: 0 30px;
-    width: 25%;
+    min-width: 33%;
+    flex: fit-content;
   }
 
-  .statWrapper {
-    min-width: 50%;
-
-    .title {
-      font-size: 1.1em;
-      margin-bottom: 10px;
+  .statistic {
+    width: 100%;
+    display: inline-flex;  
+    background: #fff;
+    border-left: 4px solid transparent;
+    border-radius: 7px;
+    padding: 20px;
+    width: 100%;
+    margin: 0;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1),0 5px 10px 0 rgba(0,0,0,0.09);
+  
+    .statWrapper {
+      min-width: 50%;
+  
+      .title {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+      }
+    
+      .stat {
+        font-size: 2em;
+        font-weight: 400;
+        color: #515151;
+        margin: 0;
+      }
     }
   
-    .stat {
-      font-size: 2em;
-      font-weight: 400;
-      color: #515151;
-      margin: 0;
+    .icon {
+      align-items: center;
+      display: flex;
+      margin-left: auto;
+      font-size: 3.25em;
+      color: #D9D9D9;
     }
-  }
-
-  .icon {
-    display: flex;
-    margin-left: auto;
-    font-size: 3.5em;
-    color: #D9D9D9;
   }
 }

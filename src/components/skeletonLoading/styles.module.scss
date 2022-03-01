@@ -1,25 +1,32 @@
 .loader {
   width: 200px;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 16px 0;
   height: 10px;
   border-radius: 10px;
 
-  animation-duration: 7s;
+  animation-duration: 4s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: shimmer;
   animation-timing-function: linear;
-  background-size: 400px 40px;
+  background-size: 200px 40px;
 
   background-color: #D9D9D9;
   background: linear-gradient(to right, #D9D9D9 10%, #fff 30%, #D9D9D9 50%);
 }
 
+table {
+  .loader {
+    margin: 0;
+    width: 100px;
+  }
+}
+
 @keyframes shimmer {
   0% {
-    background-position: -400px 0
+    background-position: -200px 0
   }
   100% {
-    background-position: 400px 0
+    background-position: 200px 0
   }
 }

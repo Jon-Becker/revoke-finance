@@ -4,8 +4,6 @@ import LinkWrap from './linkWrap';
 import { FaTachometerAlt, FaList } from "react-icons/fa";
 
 const Sidebar = ({ active, updateActive }) => {
-
-  console.log(updateActive)
   
   return (
     <div className={styles.sidebar}>

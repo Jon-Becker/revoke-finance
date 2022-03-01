@@ -3,6 +3,7 @@
   width: 100%;
   color: #000;
   position: relative;
+  overflow-y: auto;
 
   .headline {
     width: 100%;
@@ -29,11 +30,32 @@
       &:hover {
         background: #6987E2;
       }
+
+      svg {
+        margin-right: 10px;
+      }
     }
   }
 
   .dashboard {
-    display: flex;
+    width: 100%;
+    padding: 0 15px;
+    display: block;
+
+    @media (min-width: 1000px) {
+      display: inline-flex;
+      flex-wrap: wrap;
+    }
+  }
+  .approvals {
+    width: 100%;
+    padding: 0 15px;
+    display: block;
+
+    @media (min-width: 1000px) {
+      display: inline-flex;
+      flex-wrap: wrap;
+    }
   }
 }
 
@@ -51,5 +73,56 @@
   p {
     font-size: 1.2em;
     color: #717171;
+  }
+}
+
+table {
+  tr {
+    td {
+      .button {
+        width: 100%;
+        color: #fff;
+        background: #000;
+        padding: 10px 15px;
+        border-radius: 7px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      input {
+        background: #F8F8F8;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 7px 0 0 7px;
+        font-size: 1em;
+        font-weight: 400;
+        width: 100%;
+      }
+
+      .edit {
+        background: #3C62D2;
+        border-radius: 0 7px 7px 0;
+        width: fit-content;
+
+        &:hover {
+          background: #6987E2;
+        }
+      }
+
+      .revoke {
+        background: #D23C3E;
+
+        svg {
+          margin-right: 10px;
+        }
+
+        &:hover {
+          background: #E2697D;
+        }
+      }
+    }
   }
 }

@@ -9,6 +9,7 @@ body, html {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   font-family: 'Rubik', sans-serif;
 }
@@ -32,4 +33,17 @@ button, input[type="submit"], input[type="reset"] {
 
 *:focus {
   outline: 0 !important;
+}
+
+tr.danger {
+  background: #ffe8ed;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
