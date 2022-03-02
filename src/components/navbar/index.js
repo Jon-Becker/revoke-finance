@@ -46,7 +46,7 @@ const Sidebar = ({ active, account, connect }) => {
     <div className={styles.navbar}>
       
       <div className={styles.search}>
-        <input type="text" placeholder='Contract Address' id='search' 
+        <input type="text" placeholder='Token Address, Name, or Symbol' id='search' 
           onFocus={() => toggleToast()}
           onBlur={() => toggleToast()}
           onKeyUp={a =>updateToast(a)}

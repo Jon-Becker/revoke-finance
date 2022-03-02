@@ -158,12 +158,22 @@ export function getERC20Approvals() {
 }
 export function handleSearch(search) {
   var matches = [];
-  
+
   if(search.length > 0){
     
     for(let token of tokenList){
       if(token.address.toLowerCase().startsWith(search.toLowerCase())){
         matches.push(token)
+      }
+      else {
+        if(token.symbol.toLowerCase().startsWith(search.toLowerCase())){
+          matches.push(token)
+        }
+        else {
+          if(token.name.toLowerCase().startsWith(search.toLowerCase())){
+            matches.push(token)
+          }
+        }
       }
     }
   }
