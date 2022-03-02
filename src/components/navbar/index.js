@@ -30,9 +30,16 @@ const Sidebar = ({ active, account, connect }) => {
           return (
             <>
               <div className={styles.tokenWrap}>
-                <img src={token.logoURI} alt=""/>
+                {
+                  token.logoURI ? (
+                    <img src={token.logoURI} alt=""/>
+
+                  ) : (
+                    <FaEthereum className={styles.placeholder} />
+                  )
+                }
                 <div>
-                  <span>{token.name} ({token.symbol})</span>
+                  <span>{token.name} {token.symbol ? (`(${token.symbol})`) : ('')}</span>
                   <a href={`https://etherscan.io/address/${token.address}`} target="_blank">{token.address.substring(0,10)}...{token.address.substring(36)}</a>
                 </div>
                 {

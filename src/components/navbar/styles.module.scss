@@ -82,10 +82,11 @@
             border-bottom: 1px solid #D9D9D9;
           }
           
-          img {
+          img,.placeholder {
             width: 20px;
             height: 20px;
             margin-right: 20px;
+            border-radius: 7px;
           }
 
           div {
