@@ -74,55 +74,38 @@ var erc20ABI = [
   }
 ]
 
-export function getTokenList() {
-  return tokenList;
-}
-
-export function getERC20Approvals() {
-  return erc20Approvals;
-}
-
+//Util Setters
 export function resetERC20Approvals() {
   erc20Approvals = [];
 }
 
+
+// Util Loaders
 export function loadLibrary(lib) {
   library = lib;
 }
 
-export function fetchTokens(callback) {
-  callback(true, tokenList)
 
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc20.json').then(response => response.json()).then(data => {
-    tokenList = data.tokens;
-    callback(false, getTokenList())
-  });
-
-}
-
-export function getToken(address) {
-  for(let token of tokenList){
-    if(token.address.toLowerCase() == address.toLowerCase()){
-      return token;
-    }
-  }
-  return;
-}
-
-export function editAllowance(address, token, spender, update) {
+//Exported calls
+export function editAllowance(address, token, spender, callback) {
   var value = document.getElementById(`edit_amount_${token}${spender}`).value;
-  updateAllowance(address, token, spender, value, update)
+  updateAllowance(address, token, spender, value, callback)
 }
-
-export function updateAllowance(address, token, spender, value, update) {
+export function updateAllowance(address, token, spender, value, callback) {
   var BN = library.utils.BN;
   var tokenContract = new library.eth.Contract(erc20ABI, token);
-  tokenContract.methods.approve(spender, new BN(value)).send({from: address}, function(err, transaction){
-    console.log(err, transaction);
-    update();
+  tokenContract.methods.approve(spender, new BN(value)).send({from: address})
+  .on('transactionHash', function(hash){
+    console.log(hash);
+  })
+  .on('confirmation', function(confirmationNumber, receipt){
+    if(confirmationNumber == 1){
+      callback(receipt)
+    }
   })
 }
 
+//exported views
 export function fetchApprovals(address, callback) {
   library.eth.getBlockNumber(function(err, blockNumber){
     tokenList.forEach(token => {
@@ -149,4 +132,41 @@ export function fetchApprovals(address, callback) {
       });
     });
   });
+}
+export function getToken(address) {
+  for(let token of tokenList){
+    if(token.address.toLowerCase() == address.toLowerCase()){
+      return token;
+    }
+  }
+  return;
+}
+export function fetchTokens(callback) {
+  callback(true, tokenList)
+
+  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc20.json').then(response => response.json()).then(data => {
+    tokenList = data.tokens;
+    callback(false, getTokenList())
+  });
+
+}
+export function getTokenList() {
+  return tokenList;
+}
+export function getERC20Approvals() {
+  return erc20Approvals;
+}
+export function handleSearch(search) {
+  var matches = [];
+  
+  if(search.length > 0){
+    
+    for(let token of tokenList){
+      if(token.address.toLowerCase().startsWith(search.toLowerCase())){
+        matches.push(token)
+      }
+    }
+  }
+  
+  return matches;
 }

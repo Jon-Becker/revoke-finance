@@ -100,18 +100,24 @@ const View = ({ active, account, library }) => {
                               <span className={styles.tokenName}>{tokenInfo.name} ({tokenInfo.symbol})</span>
                             </div>
                           </td>
-                          <td><a href={`https://etherscan.io/address/${approval.token}`}>{approval.token.substring(0,6)}...{approval.token.substring(36)}</a></td>
-                          <td><a href={`https://etherscan.io/address/${approval.spender}`}>{approval.spender.substring(0,6)}...{approval.spender.substring(36)}</a></td>
+                          <td><a href={`https://etherscan.io/address/${approval.token}`} target="_blank">{approval.token.substring(0,6)}...{approval.token.substring(36)}</a></td>
+                          <td><a href={`https://etherscan.io/address/${approval.spender}`} target="_blank">{approval.spender.substring(0,6)}...{approval.spender.substring(36)}</a></td>
                           <td>{ approval.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993 ? (
                             "UNLIMITED"
                           ) : (approval.value)}</td>
                           <td>
                             <div className={styles.search}>
                               <input type="number" placeholder='Edit Approval' id={`edit_amount_${approval.token}${approval.spender}`}></input>
-                              <button className={`${styles.button} ${styles.edit}`} onClick={() => utils.editAllowance(account, approval.token, approval.spender, setUpdateApprovals)}><FaPen /></button>
+                              <button className={`${styles.button} ${styles.edit}`} onClick={() => utils.editAllowance(account, approval.token, approval.spender, function(txid){
+                                utils.resetERC20Approvals();
+                                setUpdateApprovals(txid)
+                              })}><FaPen /></button>
                           </div>
                           </td>
-                          <td><button className={`${styles.button} ${styles.revoke}`} onClick={() => utils.updateAllowance(account, approval.token, approval.spender, 0, setUpdateApprovals)}><FaUnlink /> REVOKE</button></td>
+                          <td><button className={`${styles.button} ${styles.revoke}`} onClick={() => utils.updateAllowance(account, approval.token, approval.spender, 0, function(txid){
+                                utils.resetERC20Approvals();
+                                setUpdateApprovals(txid)
+                              })}><FaUnlink /> REVOKE</button></td>
                         </tr>
                       );
                     })

@@ -16,6 +16,7 @@
     display: inline-flex;
     width: 100%;
     margin-right: 30px;
+    position: relative;
 
     @media (min-width: 1000px) {
       width: 20%;
@@ -40,6 +41,66 @@
 
       &:hover {
         background: #6987E2;
+      }
+    }
+
+    .toast {
+      width: 100%;
+      color: #000;
+      background: #fff;
+      border-radius: 7px;
+      position: absolute;
+      top: 0; left: 0;
+      box-shadow: 0 5px 10px 0 rgba(0,0,0,0.1),0 5px 10px 0 rgba(0,0,0,0.09);
+      z-index: 100;
+      overflow: hidden;
+      transform: translateY(50px);
+
+      button {
+        border-top: 1px solid #D9D9D9;
+        width: 100%;
+        padding: 20px 30px;
+        background: #ededed;
+
+        &:hover {
+          background: #dfdfdf;
+        }
+      }
+
+      .results {
+        max-height: 200px;
+        overflow-y: auto;
+        .tokenWrap {
+          padding: 20px 30px;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: flex;
+          align-items: center;
+
+          &:not(:last-child){
+            border-bottom: 1px solid #D9D9D9;
+          }
+          
+          img {
+            width: 20px;
+            height: 20px;
+            margin-right: 20px;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            a {
+              margin-top: 4px;
+              color: #3C62D2;
+            }
+          }
+        }
       }
     }
   }
