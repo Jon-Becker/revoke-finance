@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import styles from './styles.module.scss';
-import { FaEthereum, FaSearch } from "react-icons/fa";
+import { FaEthereum, FaExternalLinkAlt, FaSearch } from "react-icons/fa";
 import Blockie from './blockie';
 
 import * as utils from '../../library/utils';
@@ -23,6 +23,7 @@ const Sidebar = ({ active, account, connect }) => {
   function updateToast(event) {
     const query = event.target.value;
     var results = utils.handleSearch(query);
+    console.log(results)
     setToastBody(
       <div className={styles.results}>
         {results.slice(0,25).map(token => {
@@ -34,6 +35,11 @@ const Sidebar = ({ active, account, connect }) => {
                   <span>{token.name} ({token.symbol})</span>
                   <a href={`https://etherscan.io/address/${token.address}`} target="_blank">{token.address.substring(0,10)}...{token.address.substring(36)}</a>
                 </div>
+                {
+                  token.extensions.link ? (
+                    <a className={styles.externalLink} href={token.extensions.link} target="_blank"><FaExternalLinkAlt /></a>
+                  ) : ('')
+                }
               </div>
             </>
           )

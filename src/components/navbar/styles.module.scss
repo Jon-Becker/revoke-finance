@@ -57,7 +57,6 @@
       transform: translateY(50px);
 
       button {
-        border-top: 1px solid #D9D9D9;
         width: 100%;
         padding: 20px 30px;
         background: #ededed;
@@ -70,6 +69,7 @@
       .results {
         max-height: 200px;
         overflow-y: auto;
+        border-bottom: 1px solid #D9D9D9;
         .tokenWrap {
           padding: 20px 30px;
           max-width: 100%;
@@ -99,6 +99,11 @@
               margin-top: 4px;
               color: #3C62D2;
             }
+          }
+
+          .externalLink {
+            color: #B9B9B9;
+            margin-left: auto;
           }
         }
       }
