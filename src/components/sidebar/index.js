@@ -1,18 +1,22 @@
 import React from 'react';
 import styles from './styles.module.scss'
 import LinkWrap from './linkWrap';
-import { FaTachometerAlt, FaList } from "react-icons/fa";
+import { FaTachometerAlt, FaList, FaHandshake, FaGithub, FaBug } from "react-icons/fa";
 
 const Sidebar = ({ active, updateActive }) => {
   
   return (
     <div className={styles.sidebar}>
-      <h1>Fenris</h1>
+      <h1>revoke.finance</h1>
       <hr />
 
       <div className={styles.linkContainer}>
         <LinkWrap title="Dashboard" icon={<FaTachometerAlt />} active={active === "dashboard" ? true : false} update={updateActive} />
+        <LinkWrap title="Approvals" icon={<FaHandshake />} active={active === "approvals" ? true : false} update={updateActive} />
         <LinkWrap title="Tokens" icon={<FaList />} active={active === "tokens" ? true : false} update={updateActive} />
+        <hr />
+        <a href="https://github.com/Jon-Becker/revoke-finance" target="_blank"><LinkWrap title="Source Code" icon={<FaGithub />} active={false} update={console.log} /></a>
+        <a href="https://cryptosec.info/defi-hacks/" target="_blank"><LinkWrap title="Exploit List" icon={<FaBug />} active={false} update={console.log} /></a>
       </div>
 
       <div className={styles.credits}>

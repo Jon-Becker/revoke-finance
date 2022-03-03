@@ -1,7 +1,11 @@
 var tokenList = [];
+var nftList = [];
+var mixList = [];
 var library;
 
 var erc20Approvals = [];
+var erc721Approvals = [];
+var erc1155Approvals = [];
 
 var erc20ABI = [
   {
@@ -74,9 +78,16 @@ var erc20ABI = [
   }
 ]
 
+
 //Util Setters
 export function resetERC20Approvals() {
   erc20Approvals = [];
+}
+export function resetERC721Approvals() {
+  erc721Approvals = [];
+}
+export function resetERC1155Approvals() {
+  erc1155Approvals = [];
 }
 
 
@@ -135,23 +146,61 @@ export function fetchApprovals(address, callback) {
 }
 export function getToken(address) {
   for(let token of tokenList){
-    if(token.address.toLowerCase() == address.toLowerCase()){
-      return token;
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
     }
+    catch(e){}
+    
+  }
+  for(let token of nftList){
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
+    }
+    catch(e){}
+  }
+  for(let token of mixList){
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
+    }
+    catch(e){}
   }
   return;
 }
 export function fetchTokens(callback) {
   callback(true, tokenList)
-
+  getERC20()
+  getERC721()
+  getERC1155()
+}
+function getERC20() {
   fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc20.json').then(response => response.json()).then(data => {
     tokenList = data.tokens;
-    callback(false, getTokenList())
   });
-
+}
+function getERC721(callback) {
+  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc721.json').then(response => response.json()).then(data => {
+    nftList = data.tokens;
+  });
+}
+function getERC1155(callback) {
+  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc1155.json').then(response => response.json()).then(data => {
+    mixList = data.tokens;
+  });
 }
 export function getTokenList() {
   return tokenList;
+}
+export function getNFTList() {
+  return tokenList;
+}
+export function getMixList() {
+  return mixList;
 }
 export function getERC20Approvals() {
   return erc20Approvals;
@@ -162,20 +211,36 @@ export function handleSearch(search) {
   if(search.length > 0){
     
     for(let token of tokenList){
-      if(token.address.toLowerCase().startsWith(search.toLowerCase())){
+      if(
+        token.address.toLowerCase().startsWith(search.toLowerCase())
+        || token.symbol.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().includes(search.toLowerCase())
+      ){
         matches.push(token)
       }
-      else {
-        if(token.symbol.toLowerCase().startsWith(search.toLowerCase())){
-          matches.push(token)
-        }
-        else {
-          if(token.name.toLowerCase().startsWith(search.toLowerCase())){
-            matches.push(token)
-          }
-        }
+    }
+
+    for(let token of nftList){
+      if(
+        token.address.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().includes(search.toLowerCase())
+      ){
+        matches.push(token)
       }
     }
+
+    for(let token of mixList){
+      if(
+        token.address.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().startsWith(search.toLowerCase())
+        || token.name.toLowerCase().includes(search.toLowerCase())
+      ){
+        matches.push(token)
+      }
+    }
+
   }
   
   return matches;
