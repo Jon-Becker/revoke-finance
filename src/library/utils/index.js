@@ -146,19 +146,29 @@ export function fetchApprovals(address, callback) {
 }
 export function getToken(address) {
   for(let token of tokenList){
-    if(token.address.toLowerCase() == address.toLowerCase()){
-      return token;
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
     }
+    catch(e){}
+    
   }
   for(let token of nftList){
-    if(token.address.toLowerCase() == address.toLowerCase()){
-      return token;
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
     }
+    catch(e){}
   }
   for(let token of mixList){
-    if(token.address.toLowerCase() == address.toLowerCase()){
-      return token;
+    try {
+      if(token.address.toLowerCase() == address.toLowerCase()){
+        return token;
+      }
     }
+    catch(e){}
   }
   return;
 }

@@ -126,3 +126,23 @@ table {
     }
   }
 }
+
+.pagination {
+  width: 100%;
+  display: flex;
+  padding: 20px 0 0 0;
+
+  .controllerWrap {
+    margin-left: auto;
+    display: flex;
+
+    .controller {
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+    
+    .pageNumber {
+      margin: 0 20px;
+    }
+  }
+}

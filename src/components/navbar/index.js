@@ -6,7 +6,7 @@ import Blockie from './blockie';
 
 import * as utils from '../../library/utils';
 
-const Sidebar = ({ active, account, connect }) => {
+const Sidebar = ({ active, account, connect, updateActive }) => {
   
   const [showToast, setShowToast] = useState(false);
   const [toastBody, setToastBody] = useState(<></>);
@@ -30,14 +30,7 @@ const Sidebar = ({ active, account, connect }) => {
           return (
             <>
               <div className={styles.tokenWrap}>
-                {
-                  token.logoURI ? (
-                    <img src={token.logoURI} alt=""/>
-
-                  ) : (
-                    <FaEthereum className={styles.placeholder} />
-                  )
-                }
+                <img src={token.logoURI ? (token.logoURI ) : ('https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png') } />
                 <div>
                   <span>{token.name} {token.symbol ? (`(${token.symbol})`) : ('')}</span>
                   <a href={`https://etherscan.io/address/${token.address}`} target="_blank">{token.address.substring(0,10)}...{token.address.substring(36)}</a>
@@ -69,7 +62,7 @@ const Sidebar = ({ active, account, connect }) => {
         { showToast ? (
           <div className={styles.toast} onMouseDown={(e) => e.preventDefault()}>
             {toastBody}
-            <button onClick={() => alert()}>View All Tokens</button>
+            <button onClick={() => {updateActive('tokens')}}>View All Tokens</button>
           </div>
         ) : ('') }
         

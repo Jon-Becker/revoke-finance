@@ -40,7 +40,7 @@ function App() {
     <section className={styles.main}>
       <Sidebar active={activeDashboardView} updateActive={setDashboardView} />
       <div className={styles.view}>
-        <Navbar active={active} account={account} connect={connect} />
+        <Navbar active={active} account={account} connect={connect} updateActive={setDashboardView}/>
         <View active={activeDashboardView} account={account} library={library} />
       </div>
     </section>

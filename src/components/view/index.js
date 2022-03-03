@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { FaMoneyBill, FaExchangeAlt, FaDownload, FaHandshake, FaEdit, FaUnlink, FaSearch, FaPen, FaTwitter } from 'react-icons/fa'
+import { FaExchangeAlt, FaHandshake, FaUnlink, FaPen, FaTwitter, FaCodeBranch, FaChevronLeft, FaChevronRight, FaExclamationTriangle } from 'react-icons/fa'
 import { TailSpin } from  'react-loader-spinner'
 
 import SkeletonLoading from '../skeletonLoading';
@@ -19,6 +19,7 @@ const View = ({ active, account, library }) => {
 
   const [updateRequired, setUpdateRequired] = useState(false);
   const [updateApprovals, setUpdateApprovals] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
 
 
   
@@ -36,10 +37,29 @@ const View = ({ active, account, library }) => {
       utils.loadLibrary(library);
       utils.fetchApprovals(account, function(response){
         setStatThree(response.length)
+        var insecureApprovals = 0;
+        response.forEach(element => {
+          if(element.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993){
+            insecureApprovals++;
+          }
+        });
+        setStatOne(insecureApprovals)
       })
     }
   }, [account,updateApprovals])
 
+  function pageUp() {
+    var maxPages = Math.ceil((utils.getTokenList().length)/10)-1;
+    if(currentPage+1 <= maxPages){
+      setCurrentPage(currentPage+1);
+    }
+  }
+
+  function pageDown() {
+    if(currentPage-1 >= 0){
+      setCurrentPage(currentPage-1);
+    }
+  }
 
   var body = 
     <div className={styles.centered}>
@@ -51,11 +71,6 @@ const View = ({ active, account, library }) => {
 
       if(account){
 
-
-        library.eth.getBalance(account, function(err, result){
-          setStatOne(`${(result/1000000000000000000).toFixed(6)} ETH`)
-        });
-
         library.eth.getTransactionCount(account, function(err, result){
           setStatTwo(result)
         });
@@ -63,22 +78,24 @@ const View = ({ active, account, library }) => {
         var erc20Approvals = utils.getERC20Approvals();
 
       }
-
+      //TODO fix link on 84 after deployment
       body = 
         <>
           <div className={styles.headline}>
             <h2>Dashboard</h2>
-            <button className={styles.button}><FaTwitter /> Share</button>
+            <a href="https://twitter.com/intent/tweet?text=Check out this simple DApp by @BeckerrJon that lets you manage your token approvals on Ethereum.%0A%0Ahttps://jbecker.dev/" target="_blank" className={styles.button}><FaTwitter /> Share</a>
           </div>
           <div className={styles.dashboard}>
             <>
-              <Statistic color={"#1DC88A"} title={"NET WORTH"} stat={statOne ? (statOne) : (<SkeletonLoading />)} icon={<FaMoneyBill />} />
               <Statistic color={"#35B9CC"} title={"TRANSACTIONS"} stat={statTwo ? (statTwo) : (<SkeletonLoading />)} icon={<FaExchangeAlt />} />
               <Statistic color={"#F7C443"} title={"ACTIVE APPROVALS"} stat={statThree ? (statThree) : (<SkeletonLoading />)} icon={<FaHandshake />} />
+              <Statistic color={"#C71C33"} title={"UNLIMITED APPROVALS"} stat={statOne ? (statOne) : (<SkeletonLoading />)} icon={<FaExclamationTriangle />} />
             </>
 
+            <Card title={"INCIDENT FEED"} minwidth={"75%"} content={<></>} />
+            <Card title={"REPORT INCIDENT"} minwidth={"25%"} content={<></>} />
 
-            <Card title={"ERC-20 APPROVALS"} minwidth={"100%"} content={
+            <Card title={"ERC20 APPROVALS"} minwidth={"100%"} content={
               <table>
                 <tr>
                   <th>TOKEN</th>
@@ -144,18 +161,72 @@ const View = ({ active, account, library }) => {
                 }
               </table>
             }/>
+
           </div>
         </>
       break;
-
     case 'tokens':
+      body = 
+        <>
+          <div className={styles.headline}>
+            <h2>Supported Token Library</h2>
+            <a href="https://github.com/0xsequence/token-directory#add-or-update-your-token" target="_blank" className={styles.button}><FaCodeBranch /> Submit Token</a>
+          </div>
+          <div className={styles.approvals}>
+
+            <Card title={"ERC20 TOKENS"} minwidth={"100%"} content={
+              <>
+                <table>
+                  <tr>
+                    <th>TOKEN</th>
+                    <th>ADDRESS</th>
+                    <th>DECIMALS</th>
+                    <th>LINK</th>
+                  </tr>
+                  {
+                    (utils.getTokenList() && utils.getTokenList().length > 0) ? (
+                      utils.getTokenList().slice((currentPage*10),(currentPage*10)+10).map((approval) => {
+                        var tokenInfo = approval;
+                        return (
+                          <tr>
+                            <td>
+                              <div className={styles.token}>
+                                <img src={approval.logoURI ? (approval.logoURI ) : ('https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png') } />
+                                <span className={styles.tokenName}>{tokenInfo.name} ({tokenInfo.symbol})</span>
+                              </div>
+                            </td>
+                            <td><a href={`https://etherscan.io/address/${approval.address}`} target="_blank">{approval.address.substring(0,6)}...{approval.address.substring(36)}</a></td>
+                            <td>{approval.decimals ? (approval.decimals) : ('N/A')}</td>
+                            <td>{approval.extensions.link ? (
+                              <>
+                                <a href={approval.extensions.link} target="_blank">{approval.extensions.link}</a>
+                              </>
+                            ) : ('N/A')}</td>
+                          </tr>
+                        );
+                      })
+                    ):('')
+                  }
+                </table>
+                <div className={styles.pagination}>
+                  
+                  <div className={styles.controllerWrap}>
+                    <div className={styles.controller} onClick={() => pageDown()}><FaChevronLeft /></div>
+
+                    <span className={styles.pageNumber}>Page {currentPage+1} of {Math.ceil((utils.getTokenList().length)/10)}</span>
+
+                    <div className={styles.controller} onClick={() => pageUp()}><FaChevronRight /></div>
+                  </div>
+
+                </div>
+              </>
+            }/>
+          </div>
+        </>
+      break;
+    case 'approvals':
       if(account){
-
-
-        library.eth.getBalance(account, function(err, result){
-          setStatOne(`${(result/1000000000000000000).toFixed(6)} ETH`)
-        });
-
+        
         library.eth.getTransactionCount(account, function(err, result){
           setStatTwo(result)
         });
@@ -171,7 +242,7 @@ const View = ({ active, account, library }) => {
           </div>
           <div className={styles.approvals}>
 
-            <Card title={"ERC-20 APPROVALS"} minwidth={"100%"} content={
+            <Card title={"ERC20 APPROVALS"} minwidth={"100%"} content={
               <table>
                 <tr>
                   <th>TOKEN</th>
