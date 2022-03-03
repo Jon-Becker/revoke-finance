@@ -2,7 +2,7 @@ import React from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import styles from './styles.module.scss';
 
-const Card = ({ title, minwidth, content }) => {
+const Card = ({ title, minwidth, maxWidth, content }) => {
   return (
     <div className={styles.container} style={{minWidth: minwidth}}>
       <div className={styles.card}>

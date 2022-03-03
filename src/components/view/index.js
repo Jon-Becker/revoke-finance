@@ -83,7 +83,7 @@ const View = ({ active, account, library }) => {
         <>
           <div className={styles.headline}>
             <h2>Dashboard</h2>
-            <a href="https://twitter.com/intent/tweet?text=Check out this simple DApp by @BeckerrJon that lets you manage your token approvals on Ethereum.%0A%0Ahttps://jbecker.dev/" target="_blank" className={styles.button}><FaTwitter /> Share</a>
+            <a href="https://twitter.com/intent/tweet?text=Check out this simple DApp by @BeckerrJon that lets you manage your token approvals on Ethereum.%0A%0Ahttps://revoke.finance/" target="_blank" className={styles.button}><FaTwitter /> Share</a>
           </div>
           <div className={styles.dashboard}>
             <>
@@ -91,9 +91,6 @@ const View = ({ active, account, library }) => {
               <Statistic color={"#F7C443"} title={"ACTIVE APPROVALS"} stat={statThree ? (statThree) : (<SkeletonLoading />)} icon={<FaHandshake />} />
               <Statistic color={"#C71C33"} title={"UNLIMITED APPROVALS"} stat={statOne ? (statOne) : (<SkeletonLoading />)} icon={<FaExclamationTriangle />} />
             </>
-
-            <Card title={"INCIDENT FEED"} minwidth={"75%"} content={<></>} />
-            <Card title={"REPORT INCIDENT"} minwidth={"25%"} content={<></>} />
 
             <Card title={"ERC20 APPROVALS"} minwidth={"100%"} content={
               <table>
@@ -161,6 +158,17 @@ const View = ({ active, account, library }) => {
                 }
               </table>
             }/>
+
+              <Card title={"INCIDENT FEED"} minwidth={"100%"} content={
+                <table>
+                  <tr>
+                    <th>SEVERITY</th>
+                    <th>PLATFORM</th>
+                    <th>DESCRIPTION</th>
+                    <th>DATE</th>
+                  </tr>
+                </table>
+              } />
 
           </div>
         </>
