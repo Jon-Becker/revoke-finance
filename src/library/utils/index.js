@@ -105,15 +105,22 @@ export function editAllowance(address, token, spender, callback) {
 export function updateAllowance(address, token, spender, value, callback) {
   var BN = library.utils.BN;
   var tokenContract = new library.eth.Contract(erc20ABI, token);
-  tokenContract.methods.approve(spender, new BN(value)).send({from: address})
-  .on('transactionHash', function(hash){
-    console.log(hash);
-  })
-  .on('confirmation', function(confirmationNumber, receipt){
-    if(confirmationNumber == 1){
-      callback(receipt)
+  tokenContract.methods.approve(spender, new BN(value)).estimateGas((err, gas) => {
+    if(!err){
+      tokenContract.methods.approve(spender, new BN(value)).send({
+        from: address,
+        gasLimit: gas+1000
+      })
+      .on('transactionHash', function(hash){
+        console.log(hash);
+      })
+      .on('confirmation', function(confirmationNumber, receipt){
+        if(confirmationNumber == 1){
+          callback(receipt)
+        }
+      })
     }
-  })
+  });
 }
 
 //exported views
