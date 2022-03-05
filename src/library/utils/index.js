@@ -186,17 +186,17 @@ export function fetchTokens(callback) {
   getERC1155()
 }
 function getERC20() {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc20.json').then(response => response.json()).then(data => {
+  fetch('/assets/json/erc20.json').then(response => response.json()).then(data => {
     tokenList = data.tokens;
   });
 }
 function getERC721(callback) {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc721.json').then(response => response.json()).then(data => {
+  fetch('/assets/json/erc721.json').then(response => response.json()).then(data => {
     nftList = data.tokens;
   });
 }
 function getERC1155(callback) {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc1155.json').then(response => response.json()).then(data => {
+  fetch('/assets/json/erc1155.json').then(response => response.json()).then(data => {
     mixList = data.tokens;
   });
 }
