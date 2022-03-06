@@ -24,6 +24,7 @@ const View = ({ active, account, library }) => {
 
   
   useEffect(() => {
+    utils.loadIncidents();
     utils.fetchTokens(function(updateRequired){
       if(updateRequired){
         setUpdateRequired(true);

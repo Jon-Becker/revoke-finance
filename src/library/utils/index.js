@@ -202,7 +202,7 @@ function getERC1155(callback) {
     
   });
 }
-function loadIncidents() {
+export function loadIncidents() {
   fetch('https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/public/assets/json/incidents.json').then(response => response.json()).then(data => {
     incidents = data.incidents;
   });
