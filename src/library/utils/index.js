@@ -188,22 +188,22 @@ export function fetchTokens(callback) {
   loadIncidents()
 }
 function getERC20() {
-  fetch('/assets/json/erc20.json').then(response => response.json()).then(data => {
+  fetch('https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/public/assets/json/erc20.json').then(response => response.json()).then(data => {
     tokenList = data.tokens;
   });
 }
 function getERC721(callback) {
-  fetch('/assets/json/erc721.json').then(response => response.json()).then(data => {
+  fetch('https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/public/assets/json/erc721.json').then(response => response.json()).then(data => {
     nftList = data.tokens;
   });
 }
 function getERC1155(callback) {
-  fetch('/assets/json/erc1155.json').then(response => response.json()).then(data => {
+  fetch('https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/public/assets/json/erc1155.json').then(response => response.json()).then(data => {
     
   });
 }
 function loadIncidents() {
-  fetch('/assets/json/incidents.json').then(response => response.json()).then(data => {
+  fetch('https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/public/assets/json/incidents.json').then(response => response.json()).then(data => {
     incidents = data.incidents;
   });
 }
