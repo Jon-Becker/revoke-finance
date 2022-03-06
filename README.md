@@ -2,11 +2,15 @@
 
   ##### March 05, 2022&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;By [Jonathan Becker](https://jbecker.dev) 
   
-  ![OpenSea](./assets/images/preview.png?fw)
+  ![OpenSea](https://raw.githubusercontent.com/Jon-Becker/revoke-finance/main/preview.png?fw)
 
   <a href="https://revoke.finance">Revoke.finance</a> is a simple DApp which allows users to see all open token approvals on their Ethereum account and manage them in an elegant React UI. I made this project after witnessing the DDoSing of <a href="https://revoke.cash">revoke.cash</a> as well as <a href="https://etherscan.io">etherscan.io</a> during the February 19 OpenSea phishing attack.
 
   This project will be deployed to IPFS and will be DDoS proof as long as one node is hosting the file. All valid IPFS CIDs can be found on <a href="https://revoke.finance">Revoke.finance</a>, which will be updated as the project recieves further updates.
+
+  URL: https://revoke.finance/
+  
+  IPFS Mirror: ipfs://bafybeifvkg4o5b7vxitg46xevmgmza7rkjjhc6fd2dx6spl5rnrkfxgiru
 
   # 0x01. Features
 
