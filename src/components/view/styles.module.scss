@@ -26,6 +26,8 @@
       padding: 10px 30px;
       border-radius: 7px;
       transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
 
       &:hover {
         background: #6987E2;
@@ -146,5 +148,37 @@ table {
     .pageNumber {
       margin: 0 20px;
     }
+
+    a {
+      color: #3C62D2;
+    }
   }
+}
+
+.high {
+  padding: 5px 30px;
+  background: rgb(199, 28, 51);
+  color: #fff;
+  font-weight: 400;
+  border-radius: 7px;
+  display: flex !important;
+  justify-content: center;
+}
+.medium {
+  padding: 5px 30px;
+  background: rgb(247, 196, 67);
+  color: #fff;
+  font-weight: 400;
+  border-radius: 7px;
+  display: flex !important;
+  justify-content: center;
+}
+.low {
+  padding: 5px 30px;
+  background: rgb(53, 185, 204);
+  color: #fff;
+  font-weight: 400;
+  border-radius: 7px;
+  display: flex !important;
+  justify-content: center;
 }

@@ -1,6 +1,7 @@
 var tokenList = [];
 var nftList = [];
 var mixList = [];
+var incidents = [];
 var library;
 
 var erc20Approvals = [];
@@ -184,24 +185,33 @@ export function fetchTokens(callback) {
   getERC20()
   getERC721()
   getERC1155()
+  loadIncidents()
 }
 function getERC20() {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc20.json').then(response => response.json()).then(data => {
+  fetch('/assets/json/erc20.json').then(response => response.json()).then(data => {
     tokenList = data.tokens;
   });
 }
 function getERC721(callback) {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc721.json').then(response => response.json()).then(data => {
+  fetch('/assets/json/erc721.json').then(response => response.json()).then(data => {
     nftList = data.tokens;
   });
 }
 function getERC1155(callback) {
-  fetch('https://raw.githubusercontent.com/0xsequence/token-directory/master/index/mainnet/erc1155.json').then(response => response.json()).then(data => {
-    mixList = data.tokens;
+  fetch('/assets/json/erc1155.json').then(response => response.json()).then(data => {
+    
+  });
+}
+function loadIncidents() {
+  fetch('/assets/json/incidents.json').then(response => response.json()).then(data => {
+    incidents = data.incidents;
   });
 }
 export function getTokenList() {
   return tokenList;
+}
+export function getIncidents() {
+  return incidents.sort((a,b) => new Date(a.date) > new Date(b.date));
 }
 export function getNFTList() {
   return tokenList;

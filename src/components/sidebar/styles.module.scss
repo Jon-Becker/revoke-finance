@@ -5,10 +5,16 @@
   padding: 30px;
   text-align: center;
   color: #ffffff;
-  display: none;
-
+  @media (max-width: 1000px) {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    transform: translateX(-300%);
+    transition: all 0.3s;
+  }
   
   @media (min-width: 1000px) {
+    transform: auto;
     width: 10%;
     min-width: 250px;
     box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2),0 0px 20px 0 rgba(0,0,0,0.19);
@@ -51,8 +57,18 @@
 
     hr {
       margin: 20px 0;
-      
     }
 
+  }
+}
+
+.active {
+  @media (max-width: 1000px) {
+    display: inline-flex !important;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+
+    transform: translateX(0);
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { FaExchangeAlt, FaHandshake, FaUnlink, FaPen, FaTwitter, FaCodeBranch, FaChevronLeft, FaChevronRight, FaExclamationTriangle } from 'react-icons/fa'
+import { FaExchangeAlt, FaHandshake, FaUnlink, FaPen, FaTwitter, FaCodeBranch, FaChevronLeft, FaChevronRight, FaExclamationTriangle, FaExclamation } from 'react-icons/fa'
 import { TailSpin } from  'react-loader-spinner'
 
 import SkeletonLoading from '../skeletonLoading';
@@ -78,6 +78,7 @@ const View = ({ active, account, library }) => {
         var erc20Approvals = utils.getERC20Approvals();
 
       }
+
       //TODO fix link on 84 after deployment
       body = 
         <>
@@ -92,74 +93,77 @@ const View = ({ active, account, library }) => {
               <Statistic color={"#C71C33"} title={"UNLIMITED APPROVALS"} stat={statOne ? (statOne) : (<SkeletonLoading />)} icon={<FaExclamationTriangle />} />
             </>
 
-            <Card title={"ERC20 APPROVALS"} minwidth={"100%"} content={
-              <table>
-                <tr>
-                  <th>TOKEN</th>
-                  <th>CONTRACT</th>
-                  <th>SPENDER</th>
-                  <th>ALLOWANCE</th>
-                  <th>EDIT</th>
-                  <th>REVOKE</th>
-                </tr>
-                {
-                  (erc20Approvals && erc20Approvals.length > 0) ? (
-                    erc20Approvals.slice(0,5).map((approval) => {
-                      var tokenInfo = utils.getToken(approval.token)
-                      return (
-                        <tr className={approval.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993 ? ('danger'):('')}>
-                          <td>
-                            <div className={styles.token}>
-                              <img src={tokenInfo.logoURI} alt='' />
-                              <span className={styles.tokenName}>{tokenInfo.name} ({tokenInfo.symbol})</span>
+            <Card title={"APPROVAL OVERVIEW"} minwidth={"100%"} content={
+              <>
+                <table>
+                  <tr>
+                    <th>TOKEN</th>
+                    <th>CONTRACT</th>
+                    <th>SPENDER</th>
+                    <th>ALLOWANCE</th>
+                    <th>EDIT</th>
+                    <th>REVOKE</th>
+                  </tr>
+                  {
+                    (erc20Approvals && erc20Approvals.length > 0) ? (
+                      erc20Approvals.slice(0,5).map((approval) => {
+                        var tokenInfo = utils.getToken(approval.token)
+                        return (
+                          <tr className={approval.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993 ? ('danger'):('')}>
+                            <td>
+                              <div className={styles.token}>
+                                <img src={tokenInfo.logoURI} alt='' />
+                                <span className={styles.tokenName}>{tokenInfo.name} ({tokenInfo.symbol})</span>
+                              </div>
+                            </td>
+                            <td><a href={`https://etherscan.io/address/${approval.token}`} target="_blank">{approval.token.substring(0,6)}...{approval.token.substring(36)}</a></td>
+                            <td><a href={`https://etherscan.io/address/${approval.spender}`} target="_blank">{approval.spender.substring(0,6)}...{approval.spender.substring(36)}</a></td>
+                            <td>{ approval.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993 ? (
+                              "UNLIMITED"
+                            ) : (approval.value)}</td>
+                            <td>
+                              <div className={styles.search}>
+                                <input type="number" placeholder='Edit Approval' id={`edit_amount_${approval.token}${approval.spender}`}></input>
+                                <button className={`${styles.button} ${styles.edit}`} onClick={() => utils.editAllowance(account, approval.token, approval.spender, function(txid){
+                                  utils.resetERC20Approvals();
+                                  setUpdateApprovals(txid)
+                                })}><FaPen /></button>
                             </div>
-                          </td>
-                          <td><a href={`https://etherscan.io/address/${approval.token}`} target="_blank">{approval.token.substring(0,6)}...{approval.token.substring(36)}</a></td>
-                          <td><a href={`https://etherscan.io/address/${approval.spender}`} target="_blank">{approval.spender.substring(0,6)}...{approval.spender.substring(36)}</a></td>
-                          <td>{ approval.value > 11579208923731619542357098500868790785326998466564056403945758400791312963993 ? (
-                            "UNLIMITED"
-                          ) : (approval.value)}</td>
-                          <td>
-                            <div className={styles.search}>
-                              <input type="number" placeholder='Edit Approval' id={`edit_amount_${approval.token}${approval.spender}`}></input>
-                              <button className={`${styles.button} ${styles.edit}`} onClick={() => utils.editAllowance(account, approval.token, approval.spender, function(txid){
-                                utils.resetERC20Approvals();
-                                setUpdateApprovals(txid)
-                              })}><FaPen /></button>
-                          </div>
-                          </td>
-                          <td><button className={`${styles.button} ${styles.revoke}`} onClick={() => utils.updateAllowance(account, approval.token, approval.spender, 0, function(txid){
-                                utils.resetERC20Approvals();
-                                setUpdateApprovals(txid)
-                              })}><FaUnlink /> REVOKE</button></td>
+                            </td>
+                            <td><button className={`${styles.button} ${styles.revoke}`} onClick={() => utils.updateAllowance(account, approval.token, approval.spender, 0, function(txid){
+                                  utils.resetERC20Approvals();
+                                  setUpdateApprovals(txid)
+                                })}><FaUnlink /> REVOKE</button></td>
+                          </tr>
+                        );
+                      })
+                    ):(
+                      <>
+                        <tr>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
                         </tr>
-                      );
-                    })
-                  ):(
-                    <>
-                      <tr>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                      </tr>
-                      <tr>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                        <td><SkeletonLoading /></td>
-                      </tr>
-                    </>
-                  )
-                }
-              </table>
+                        <tr>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                          <td><SkeletonLoading /></td>
+                        </tr>
+                      </>
+                    )
+                  }
+                </table>
+              </>
             }/>
 
               <Card title={"INCIDENT FEED"} minwidth={"100%"} content={
+                <>
                 <table>
                   <tr>
                     <th>SEVERITY</th>
@@ -167,8 +171,72 @@ const View = ({ active, account, library }) => {
                     <th>DESCRIPTION</th>
                     <th>DATE</th>
                   </tr>
+                
+                {
+                  (utils.getIncidents() && utils.getIncidents().length > 0) ? (
+                    utils.getIncidents().slice(0,5).map((incidents) => {
+                      return(
+                        <tr>
+                          <td>
+                            {
+                              (incidents.severity == 'high') ? (
+                                <div className={styles.high}>HIGH</div>
+                              ) : (
+                                (incidents.severity == 'medium') ? (
+                                  <div className={styles.medium}>MEDIUM</div>
+                                ) : (
+                                  (incidents.severity == 'low') ? (
+                                    <div className={styles.low}>LOW</div>
+                                  ) : ('')
+                                )
+                              )
+                            }
+                          </td>
+                          <td>
+                            <div style={{width: "max-content"}}>
+                              <img src={incidents.platform.logoURI ? (incidents.platform.logoURI ) : ('https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png')} alt='' />
+                              {incidents.platform.name}
+                              {
+                                incidents.platform.address ? (
+                                  <span>( <a href={`https://etherscan.io/address/${incidents.platform.address}`} target="_blank">{incidents.platform.address.substring(0,6)}...{incidents.platform.address.substring(36)} </a>)</span>
+                                ) : ('')
+                              }
+                            </div>
+                          </td>
+                          <td>
+                            <div style={{width: "max-content", maxWidth: "100%", display: "block"}}>
+                              {incidents.description}
+                              {
+                                incidents.source ? (
+                                  <>
+                                    <br /><br /><a href={incidents.source} target="_blank">Source</a>
+                                  </>
+                                ) : ('')
+                              }
+                            </div>
+                          </td>
+                          <td>{incidents.date}</td>
+                        </tr>
+                      )
+                    })
+                  ) : (
+                    <tr>
+                      <td><SkeletonLoading /></td>
+                      <td><SkeletonLoading /></td>
+                      <td><SkeletonLoading /></td>
+                      <td><SkeletonLoading /></td>
+                    </tr>
+                  )
+                }
                 </table>
-              } />
+                <div className={styles.pagination}>
+
+                </div>
+                </>
+              } 
+              button={<a href="https://github.com/Jon-Becker/revoke-finance/">ADD REPORT</a>}
+              />
+              
 
           </div>
         </>
@@ -177,8 +245,8 @@ const View = ({ active, account, library }) => {
       body = 
         <>
           <div className={styles.headline}>
-            <h2>Supported Token Library</h2>
-            <a href="https://github.com/0xsequence/token-directory#add-or-update-your-token" target="_blank" className={styles.button}><FaCodeBranch /> Submit Token</a>
+            <h2>Supported Tokens</h2>
+            <a href="https://github.com/Jon-Becker/revoke-finance/" target="_blank" className={styles.button}><FaCodeBranch /> Contribute</a>
           </div>
           <div className={styles.approvals}>
 

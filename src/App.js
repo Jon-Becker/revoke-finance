@@ -9,9 +9,15 @@ import View from './components/view';
 
 function App() {
 
-  const [activeDashboardView, setDashboardView] = useState("dashboard");
+  const [activeDashboardView, setDashboardViewState] = useState("dashboard");
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const { active, account, library, activate, deactivate } = useWeb3React()
+
+  function setDashboardView(state) {
+    setDashboardViewState(state)
+    setShowDropdown(false)
+  }
 
   async function connect() {
     try {
@@ -38,9 +44,9 @@ function App() {
 
   return (
     <section className={styles.main}>
-      <Sidebar active={activeDashboardView} updateActive={setDashboardView} />
+      <Sidebar active={activeDashboardView} updateActive={setDashboardView} showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
       <div className={styles.view}>
-        <Navbar active={active} account={account} connect={connect} updateActive={setDashboardView}/>
+        <Navbar active={active} account={account} connect={connect} updateActive={setDashboardView} showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
         <View active={activeDashboardView} account={account} library={library} />
       </div>
     </section>

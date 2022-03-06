@@ -1,15 +1,17 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import styles from './styles.module.scss';
-import { FaEthereum, FaExternalLinkAlt, FaSearch } from "react-icons/fa";
+import { FaBars, FaEthereum, FaExternalLinkAlt, FaSearch } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
 import Blockie from './blockie';
 
 import * as utils from '../../library/utils';
 
-const Sidebar = ({ active, account, connect, updateActive }) => {
+const Sidebar = ({ active, account, connect, updateActive, showDropdown, setShowDropdown }) => {
   
   const [showToast, setShowToast] = useState(false);
   const [toastBody, setToastBody] = useState(<></>);
+  
 
   function toggleToast() {
     if(showToast){
@@ -17,6 +19,14 @@ const Sidebar = ({ active, account, connect, updateActive }) => {
     }
     else {
       setShowToast(true)
+    }
+  }
+  function toggleDropdown() {
+    if(showDropdown){
+      setShowDropdown(false)
+    }
+    else {
+      setShowDropdown(true)
     }
   }
 
@@ -67,6 +77,8 @@ const Sidebar = ({ active, account, connect, updateActive }) => {
         ) : ('') }
         
       </div>
+
+      <FaBars className={styles.bars} onClick={() => toggleDropdown()} />
 
       <div className={styles.connect}>
         {

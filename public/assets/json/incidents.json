@@ -1,0 +1,27 @@
+{
+    "incidents": [
+        {
+            "severity": "medium",
+            "platform": {
+              "name": "OpenSea",
+              "address": "0x7f268357a8c2552623316e2562d90e642bb538e5",
+              "logoURI": "https://opensea.io/static/images/logos/opensea.svg"
+            },
+            "description": "Reports of an ongoing phishing attack on OpenSea users.", 
+            "source": "https://twitter.com/opensea/status/1495211277097996290",
+            "date": "2022-02-19 20:30:00"
+        },
+        {
+            "severity": "high",
+            "platform": {
+              "name": "Wormhole",
+              "address": "0x3ee18b2214aff97000d974cf647e7c347e8fa585",
+              "logoURI": "https://pbs.twimg.com/profile_images/1485673210545065985/6_BFqnKf_400x400.jpg"
+            },
+            "description": "One of the most popular cross-blockchain bridges may have been the victim of a hack worth over $326 million on Wednesday.", 
+            "source": "https://www.coindesk.com/tech/2022/02/02/blockchain-bridge-wormhole-suffers-possible-exploit-worth-over-250m/",
+            "date": "2022-02-03 12:00:00"
+        }
+    ]
+
+}

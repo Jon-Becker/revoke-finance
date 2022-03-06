@@ -3,10 +3,10 @@ import styles from './styles.module.scss'
 import LinkWrap from './linkWrap';
 import { FaTachometerAlt, FaList, FaHandshake, FaGithub, FaBug } from "react-icons/fa";
 
-const Sidebar = ({ active, updateActive }) => {
+const Sidebar = ({ active, updateActive, showDropdown, setShowDropdown }) => {
   
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${showDropdown ? (styles.active) : ('')}`}>
       <h1>revoke.finance</h1>
       <hr />
 

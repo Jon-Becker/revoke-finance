@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Revoke.Finance
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  ##### March 05, 2022&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;By [Jonathan Becker](https://jbecker.dev) 
+  
+  ![OpenSea](./assets/images/preview.png?fw)
 
-## Available Scripts
+  <a href="https://revoke.finance">Revoke.finance</a> is a simple DApp which allows users to see all open token approvals on their Ethereum account and manage them in an elegant React UI. I made this project after witnessing the DDoSing of <a href="https://revoke.cash">revoke.cash</a> as well as <a href="https://etherscan.io">etherscan.io</a> during the February 19 OpenSea phishing attack.
 
-In the project directory, you can run:
+  This project will be deployed to IPFS and will be DDoS proof as long as one node is hosting the file. All valid IPFS CIDs can be found on <a href="https://revoke.finance">Revoke.finance</a>, which will be updated as the project recieves further updates.
 
-### `npm start`
+  # 0x01. Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  ### ERC20 Approval List
+  The main feature of this project is the approval list, which will show all active approvals from supported ERC-20 tokens. This allows users to view the `Token`, `Contract Address`, `Spender Address`, and `Allowance Amount` for each approval, and give them the option to edit or revoke this approval.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  ### Incident Feed
+  Another valuable feature of this DApp is the incident feed, which will allow users to see in real-time incidents that are ongoing within the cryptospace. This includes hacks, exploits, or bugs, and will allow users on the application to see which approvals may be risked due to an ongoing incident.
 
-### `npm test`
+  ### Open Source
+  This entire project is open-source and crowdsourced. If you have an ERC-20 token you want supported, or want to report an incident, all you have to do is open a pull-request and it will be added to the DApp. For more information on contributing, see the next section. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  # 0x02. Contributing
 
-### `npm run build`
+  ### Adding support for a token
+  If you want to add support for a token or change token information, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - 1. Fork this repository
+  - 2. Add or edit the token within <a href="https://github.com/Jon-Becker/revoke-finance/tree/main/public/assets/json/erc20.json">public/assets/json/erc20.json</a>.
+    - In order to be accepted, follow the JSON format below:
+      ```
+      {
+        chainId: number,         // Chain ID 
+        address: string,         // Contract address
+        name: string,            // Name of token, 40 chars max
+        symbol: string,          // Symbol of token, 20 chars max
+        decimals: number,        // Number of decimals token uses
+        logoURI: string | null,  // URI / URL for token logo 
+        extensions: {
+          link: string | null,        // URL of token's website
+          description: string | null, // Short description of token (1000 chars max)
+          ogImage: string | null      // URL of Open Graph image of token website 
+        }
+      }
+      ```
+    - Fields that do not exist should be marked `null`.
+  - 3. Open a pull request to the main branch.
+    - If you are updating a token, explain why within your PR.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ### Reporting an Incident
+  If you are reporting an incident that is ongoing or has happened in the past, follow these steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - 1. Fork this repository
+  - 2. Add or edit the incident within <a href="https://github.com/Jon-Becker/revoke-finance/tree/main/public/assets/json/incidents.json">public/assets/json/incidents.json</a>.
+    - In order to be accepted, follow the JSON format below:
+      ```
+      {
+        severity: string ,           // high, medium, or low
+        platform: {
+          name: string,              // Name of platform
+          address: string | null,    // Contract address of platform
+          logoURI: string | null,    // Link to platform Logo
+        },
+        description: string,         // Detailed description of incident (50 char min, 1000 max)
+        source: string | null,       // Valid source regarding incident
+        date: string,                // Date of incident, YYYY-MM-DD HH24:MM:SS (2022-03-05 23:59:59)
+      }
+      ```
+    - Fields that do not exist should be marked `null`.
+  - 3. Open a pull request to the main branch.
+    - If you are updating an incident, explain why within your PR.
 
-### `npm run eject`
+  # 0x03 Resources & Citations
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - ERC20 token directory: [0xSequence/token-directory](hhttps://github.com/0xsequence/token-directory)

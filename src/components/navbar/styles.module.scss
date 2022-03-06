@@ -7,18 +7,21 @@
   color: #fff;
   height: fit-content;
   display: inline-flex;
+  align-items: center;
   
   @media (min-width: 1000px) {
     box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2),0 0px 20px 0 rgba(0,0,0,0.19);
   }
 
   .search {
-    display: inline-flex;
+    
     width: 100%;
     margin-right: 30px;
     position: relative;
+    display:none;
 
     @media (min-width: 1000px) {
+      display: inline-flex;
       width: 30%;
       margin-right: auto;
     }
@@ -111,6 +114,16 @@
     }
   }
 
+  .bars {
+    color: #717171;
+    font-size: 2em;
+    cursor: pointer;
+
+    @media (min-width: 1000px) {
+      display: none;
+    }
+  }
+
   .connect {
     margin-left: auto;
     border-left: 1px solid #E9E9E9;
@@ -145,4 +158,5 @@
       margin-right: 30px;
     }
   }
+
 }
