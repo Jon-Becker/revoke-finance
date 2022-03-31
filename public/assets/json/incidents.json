@@ -21,6 +21,17 @@
             "description": "One of the most popular cross-blockchain bridges may have been the victim of a hack worth over $326 million on Wednesday.", 
             "source": "https://www.coindesk.com/tech/2022/02/02/blockchain-bridge-wormhole-suffers-possible-exploit-worth-over-250m/",
             "date": "2022-02-03 12:00:00"
+        },
+        {
+            "severity": "low",
+            "platform": {
+              "name": "Axie Infinity",
+              "address": "0xf5d669627376ebd411e34b98f19c868c8aba5ada",
+              "logoURI": "https://assets.coingecko.com/coins/images/13029/large/axie_infinity_logo.png?1604471082"
+            },
+            "description": "Axie Infinity's Ronin Network fell victim to a $625M exploit due to improper use of multi-sig voting.", 
+            "source": "https://jbecker.dev/research/ronin-attack/",
+            "date": "2022-03-29 12:00:00"
         }
     ]
 
